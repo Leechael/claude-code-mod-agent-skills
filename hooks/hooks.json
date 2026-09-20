@@ -1,0 +1,4 @@
+{
+  "description": "Bridge .agents/skills into Claude Code via Mods: discover SKILL.md trees, register slash commands, inject a prompt.context catalog, optionally intercept the Skill tool.",
+  "modules": ["./register.ts"]
+}

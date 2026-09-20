@@ -1,0 +1,52 @@
+{
+  "name": "agents-skills",
+  "version": "0.1.0",
+  "description": "Discover Agent Skills under .agents/skills (project) and ~/.agents/skills (user), expose them as slash commands, list them in prompt.context, and optionally intercept the Skill tool so names from those trees load without living under .claude/skills.",
+  "author": {
+    "name": "Hypatia draft"
+  },
+  "userConfig": {
+    "projectSkills": {
+      "type": "boolean",
+      "title": "Project .agents/skills",
+      "description": "Scan <cwd-and-ancestors>/.agents/skills/*/SKILL.md up to the git root (or filesystem root when not in a repo).",
+      "required": false,
+      "default": true
+    },
+    "userSkills": {
+      "type": "boolean",
+      "title": "User ~/.agents/skills",
+      "description": "Scan ~/.agents/skills/*/SKILL.md (HOME / USERPROFILE).",
+      "required": false,
+      "default": true
+    },
+    "registerCommands": {
+      "type": "boolean",
+      "title": "Register slash commands",
+      "description": "For each discovered skill, $.command.register(/name) and serve the SKILL.md body on command.run.",
+      "required": false,
+      "default": true
+    },
+    "injectCatalog": {
+      "type": "boolean",
+      "title": "Inject catalog into prompt.context",
+      "description": "Add a short Available skills (.agents/skills) block with name + description so the model can see them without native Skill listing.",
+      "required": false,
+      "default": true
+    },
+    "interceptSkillTool": {
+      "type": "boolean",
+      "title": "Intercept Skill tool",
+      "description": "When the model calls Skill with a name we discovered and the engine would miss it, load SKILL.md ourselves and return a synthetic success instead of next().",
+      "required": false,
+      "default": true
+    },
+    "preferClaudeSkills": {
+      "type": "boolean",
+      "title": "Prefer .claude/skills on name clash",
+      "description": "If a slash/Skill name already exists from .claude/skills or a plugin, skip registering our copy.",
+      "required": false,
+      "default": true
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "agents-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude Code mod: bridge .agents/skills via Mods API",
+  "type": "module",
+  "scripts": {
+    "smoke": "./tests/smoke.sh"
+  }
+}
