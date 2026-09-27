@@ -1,0 +1,11 @@
+{
+  "name": "claude-code-mod-agent-skills",
+  "owner": "Leechael",
+  "plugins": [
+    {
+      "name": "agents-skills",
+      "source": "./plugins/agents-skills",
+      "description": "Discover Agent Skills under .agents/skills (project) and ~/.agents/skills (user), expose them as slash commands, list them in prompt.context, and optionally intercept the Skill tool so names from those trees load without living under .claude/skills."
+    }
+  ]
+}

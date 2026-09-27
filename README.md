@@ -48,16 +48,53 @@ description: One line on when to use this skill.
 Body the model should follow…
 ```
 
-## Install (draft)
+## Install
 
-Until this lives in a marketplace:
+**Important:** This is a Claude Code mod that requires function hooks to be enabled.
+
+### Option 1: Install from marketplace (persistent)
 
 ```bash
-# from a checkout of this repo
-claude plugins install ./   # or link as a local plugin per current Claude Code docs
+# Add the marketplace
+claude plugin marketplace add Leechael/claude-code-mod-agent-skills
+
+# Install the plugin
+claude plugin install agents-skills@claude-code-mod-agent-skills
+
+# In Claude Code session, reload plugins
+/reload-plugins
 ```
 
-Enable the mod / function hooks path for the plugin (same seating as `agents-md` / other mods). Exact CLI flag may change with Claude Code builds — check `claude --help` and the Mods docs for your version.
+To persist function hooks across sessions, add to your `settings.json`:
+
+```json
+{
+  "env": {
+    "CLAUDE_CODE_ENABLE_FUNCTION_HOOKS": "1"
+  }
+}
+```
+
+### Option 2: Development / one-shot mode
+
+```bash
+# From a checkout of this repo, run Claude Code with the plugin directory
+CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1 claude --plugin-dir ./plugins/agents-skills
+```
+
+### Validation
+
+To verify the marketplace and plugin structure:
+
+```bash
+# Validate marketplace
+claude plugin validate
+
+# Validate the plugin
+cd plugins/agents-skills && claude plugin validate
+```
+
+**Note:** Without the `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1` environment variable, the plugin will install but hooks will not execute.
 
 ## Options (`userConfig`)
 
@@ -81,7 +118,7 @@ Enable the mod / function hooks path for the plugin (same seating as `agents-md`
 ## Out of scope (v0)
 
 - Writing skills into `.claude/skills`
-- Marketplace packaging / auto-update
+- Auto-update (marketplace structure is now available)
 - Full YAML frontmatter (only `name` + `description`)
 - Watching the filesystem for hot reload (re-discover on next `session.start`)
 
