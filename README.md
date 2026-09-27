@@ -48,16 +48,30 @@ description: One line on when to use this skill.
 Body the model should follow…
 ```
 
-## Install (draft)
+## Install
 
-Until this lives in a marketplace:
+### From marketplace
 
 ```bash
-# from a checkout of this repo
-claude plugins install ./   # or link as a local plugin per current Claude Code docs
+claude plugin marketplace add Leechael/claude-code-mod-agent-skills
+claude plugin install agents-skills@claude-code-mod-agent-skills
 ```
 
-Enable the mod / function hooks path for the plugin (same seating as `agents-md` / other mods). Exact CLI flag may change with Claude Code builds — check `claude --help` and the Mods docs for your version.
+### Development (local checkout)
+
+```bash
+CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1 claude --plugin-dir ./plugins/agents-skills
+```
+
+To persist function hooks across sessions, add to your Claude Code settings.json:
+
+```json
+{
+  "env": {
+    "CLAUDE_CODE_ENABLE_FUNCTION_HOOKS": "1"
+  }
+}
+```
 
 ## Options (`userConfig`)
 
@@ -81,7 +95,7 @@ Enable the mod / function hooks path for the plugin (same seating as `agents-md`
 ## Out of scope (v0)
 
 - Writing skills into `.claude/skills`
-- Marketplace packaging / auto-update
+- Auto-update after marketplace installation
 - Full YAML frontmatter (only `name` + `description`)
 - Watching the filesystem for hot reload (re-discover on next `session.start`)
 
